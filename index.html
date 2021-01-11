@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href='ico/favicon.ico' rel='icon'>
+  <title>Livros front</title>
+</head>
+<body>
+  <h1>Lista de livros alimentado por uma API</h1>
+  <ul id = 'livros'>
+  </ul>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script>
+    axios.get('http://localhost:3000/items')
+      .then(response => criaListaDinamica(response.data))
+      .catch(error => console.log(error))
+      const criaListaDinamica = (data) => {
+        const ulLivros = document.getElementById('livros')
+        data.books.map(livro =>{
+          const listaLivro = document.createElement('li')
+          listaLivro.innerHTML = `Nome: ${livro.title}`
+          ulLivros.appendChild(listaLivro)
+        })
+      }
+  </script>
+</html>
